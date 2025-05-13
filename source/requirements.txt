@@ -1,0 +1,14 @@
+torch==2.0.1+cu117
+torchvision==0.15.2+cu117
+torchaudio==2.0.2+cu117
+# ==========================================================
+
+# NMT and NLP Libraries
+sentencepiece==0.1.99
+sacrebleu==2.4.0  # Hoặc phiên bản mới hơn nếu có
+nltk==3.8.1
+
+# Utility Libraries
+tqdm==4.66.1 # Hoặc phiên bản mới hơn
+numpy==1.26.2 # Thường được PyTorch yêu cầu
+# matplotlib==3.8.2 # Bỏ comment nếu bạn có code vẽ đồ thị

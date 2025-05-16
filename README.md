@@ -1,39 +1,50 @@
 # Enhanced Transformer for Vietnamese-Lao Neural Machine Translation
 
-This project implements an advanced Transformer-based Neural Machine Translation (NMT) model for translating between Vietnamese (Vi) and Lao (Lo), two low-resource languages. The model incorporates several modern architectural and training enhancements to improve translation quality.
+This project implements and evaluates an enhanced Transformer-based Neural Machine Translation (NMT) model for the low-resource Vietnamese (Vi) to Lao (Lo) language pair. The model incorporates several modern architectural improvements to enhance translation quality.
 
-![Transformer Architecture (Illustrative)](https://[Placeholder: Link to an illustrative image of Transformer, or your model if you have one])
-*(Replace the placeholder link above with an actual image if desired)*
+## Project Overview
+
+Translating between low-resource languages like Vietnamese and Lao presents significant challenges due to data scarcity and linguistic disparities. This project aims to address these challenges by:
+
+1.  **Building a Transformer model from scratch** using PyTorch.
+2.  **Integrating advanced architectural enhancements**:
+    *   **Rotary Positional Embedding (RoPE)** for more effective relative positional encoding.
+    *   **GeGLU activation function** within the Feed-Forward Networks (FFNs) for potentially better representation learning.
+    *   **Pre-Layer Normalization (Pre-LN)** for improved training stability.
+3.  **Investigating the impact of vocabulary size** on translation performance.
+4.  Training the model with a **fixed learning rate** and **label smoothing**.
+5.  Evaluating the model using the **BLEU score**.
+
+The primary goal is to demonstrate the effectiveness of these combined enhancements in a low-resource NMT setting.
 
 ## Features
 
-*   **Transformer Architecture:** Built from scratch using PyTorch.
-*   **Rotary Positional Embedding (RoPE):** For improved relative positional encoding.
-*   **GeGLU Activation:** Utilized in the Feed-Forward Network (FFN) layers for better expressiveness.
-*   **Pre-Layer Normalization (Pre-LN):** For enhanced training stability.
-*   **Optimized Training:**
-    *   Label Smoothing
-    *   AdamW Optimizer
-    *   "Attention is All You Need" Learning Rate Scheduler (Inverse Square Root with Warmup)
-*   **Beam Search Decoding:** With length penalty for higher quality translations.
-*   **Tokenization:** SentencePiece (BPE) for subword tokenization.
-*   **Evaluation:** BLEU and METEOR scores.
+*   **Custom Transformer Implementation**: Built with PyTorch, allowing for detailed control over the architecture.
+*   **Rotary Positional Embedding (RoPE)**: Integrated into the multi-head attention mechanism.
+*   **GeGLU Activation**: Used in the position-wise feed-forward networks.
+*   **Pre-Layer Normalization**: Applied before each sub-layer in the encoder and decoder.
+*   **SentencePiece Tokenization**: Utilizes BPE for subword tokenization, with support for different vocabulary sizes.
+*   **Fixed Learning Rate Training**: Employs AdamW optimizer with a fixed learning rate.
+*   **Label Smoothing**: Incorporated into the loss function for better generalization.
+*   **Greedy Decoding**: Used for generating translations during inference and evaluation.
+*   **Evaluation Scripts**: Includes code for calculating BLEU scores.
+*   **Clear Training and Inference Pipelines**.
 
-## Project Structure
-├── data/
-│ ├── train.vi
-│ ├── train.lo
-│ ├── dev.vi
-│ ├── dev.lo
-│ ├── test.vi
-│ └── test.lo
-├── src/
-│ └── main_nmt.py # Main Python script for training and inference
-├── spm_vi.model # Trained SentencePiece model for Vietnamese
-├── spm_vi.vocab # Vietnamese vocabulary file
-├── spm_lo.model # Trained SentencePiece model for Lao
-├── spm_lo.vocab # Lao vocabulary file
-├── transformer_vi_lo_final_best.pt # Saved best model weights
-├── requirements.txt # Python dependencies
-├── README.md # This file
-└── (Optional: vi_lo_nmt_report.pdf, vi_lo_nmt_slides.pdf)
+## Dataset
+
+The model is trained and evaluated on a Vietnamese-Lao parallel corpus.
+*   **Source Language**: Vietnamese (vi)
+*   **Target Language**: Lao (lo)
+
+The data should be pre-split into `train`, `dev` (development/validation), and `test` sets for each language (e.g., `train.vi`, `train.lo`, `dev.vi`, `dev.lo`, `test.vi`, `test.lo`).
+
+The dataset used in this project can be found at VLSP or is based on the VLSP2023 corpus.
+
+
+## Requirements
+
+*   Python 3.7+
+*   PyTorch (tested with version X.Y.Z)
+*   SentencePiece
+*   SacreBLEU
+*   tqdm
